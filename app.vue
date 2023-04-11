@@ -1,0 +1,18 @@
+<template>
+  <div>
+    <!-- <NuxtWelcome /> -->
+
+    <button @click="counter.decrement()">---</button>
+    <br>
+    <p>{{ counter.count }}</p>
+    <br>
+    <button @click="counter.increment()">+++</button>
+  </div>
+</template>
+
+<script setup>
+import { useCounterStore } from '@/stores/counter'
+
+// access the `counter` variable anywhere in the component ✨
+const counter = useCounterStore()
+</script>
