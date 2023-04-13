@@ -4,8 +4,11 @@ export default defineNuxtConfig({
     // ...
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
+    "~/modules/ant-design-vue",
   ],
   buildModules: ["@nuxtjs/composition-api/module"],
+  plugins: [{ src: "~/plugins/vuesax.js", mode: "client" }],
+  css: ["ant-design-vue/dist/antd.css"],
   pinia: {
     autoImports: [
       // automatically imports `defineStore`

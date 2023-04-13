@@ -49,8 +49,8 @@
 </template>
 
 <script setup>
-import { useCounterStore } from "@/stores/counter";
-import { useMultiplyStore } from "./stores/multiply";
+import { useCounterStore } from "~/stores/counter";
+import { useMultiplyStore } from "~/stores/multiply";
 
 // access the `counter` variable anywhere in the component ✨
 const counter = useCounterStore();

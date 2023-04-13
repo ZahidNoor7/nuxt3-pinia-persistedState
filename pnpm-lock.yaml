@@ -16,6 +16,7 @@ specifiers:
   nuxt: ^3.3.3
   pinia: ^2.0.34
   prettier: ^2.8.7
+  vuesax: 4.0.1-alpha.25
 
 dependencies:
   '@ant-design/icons-vue': 6.1.0
@@ -31,6 +32,7 @@ dependencies:
   node-sass: 8.0.0
   pinia: 2.0.34
   prettier: 2.8.7
+  vuesax: 4.0.1-alpha.25
 
 devDependencies:
   '@pinia-plugin-persistedstate/nuxt': 1.1.1_amz4aixu24t7iq73gx72poy44y
@@ -5211,6 +5213,12 @@ packages:
   /vue-devtools-stub/0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
 
+  /vue-router/3.6.5:
+    resolution: {integrity: sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ==}
+    peerDependencies:
+      vue: ^2
+    dev: false
+
   /vue-router/4.1.6_vue@3.2.47:
     resolution: {integrity: sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ==}
     peerDependencies:
@@ -5236,6 +5244,15 @@ packages:
       '@vue/runtime-dom': 3.2.47
       '@vue/server-renderer': 3.2.47_vue@3.2.47
       '@vue/shared': 3.2.47
+
+  /vuesax/4.0.1-alpha.25:
+    resolution: {integrity: sha512-cVLpKsem/YsMSbiy2s2M0O6rr8wrakOUFn0JYxtVQ1WgbVUD0/kU2/GMPVeRBNOh+30tRy2TKreFmjqc53vIBQ==}
+    requiresBuild: true
+    dependencies:
+      vue-router: 3.6.5
+    transitivePeerDependencies:
+      - vue
+    dev: false
 
   /warning/4.0.3:
     resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
