@@ -51,19 +51,16 @@
         "public/*"
       ],
       "#app": [
-        "node_modules/.pnpm/nuxt@3.3.3/node_modules/nuxt/dist/app"
+        "node_modules/.pnpm/nuxt@3.4.0/node_modules/nuxt/dist/app"
       ],
       "#app/*": [
-        "node_modules/.pnpm/nuxt@3.3.3/node_modules/nuxt/dist/app/*"
+        "node_modules/.pnpm/nuxt@3.4.0/node_modules/nuxt/dist/app/*"
       ],
       "vue-demi": [
-        "node_modules/.pnpm/nuxt@3.3.3/node_modules/nuxt/dist/app/compat/vue-demi"
+        "node_modules/.pnpm/nuxt@3.4.0/node_modules/nuxt/dist/app/compat/vue-demi"
       ],
       "pinia": [
         "node_modules/.pnpm/pinia@2.0.34/node_modules/pinia/dist/pinia"
-      ],
-      "@vueuse/head": [
-        "node_modules/.pnpm/@unhead+vue@1.1.25_vue@3.2.47/node_modules/@unhead/vue/dist/index"
       ],
       "#imports": [
         ".nuxt/imports"

@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
   ],
+  buildModules: ["@nuxtjs/composition-api/module"],
   pinia: {
     autoImports: [
       // automatically imports `defineStore`

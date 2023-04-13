@@ -8,10 +8,9 @@ type InjectionType<A extends Plugin> = A extends Plugin<infer T> ? Decorate<T> :
 type NuxtAppInjections = 
   InjectionType<typeof import("../../node_modules/.pnpm/@pinia+nuxt@0.4.8/node_modules/@pinia/nuxt/dist/runtime/plugin.vue3").default> &
   InjectionType<typeof import("../components.plugin").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.3.3/node_modules/nuxt/dist/head/runtime/plugins/unhead").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.3.3/node_modules/nuxt/dist/head/runtime/plugins/vueuse-head-polyfill").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.3.3/node_modules/nuxt/dist/app/plugins/router").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.3.3/node_modules/nuxt/dist/app/plugins/chunk-reload.client").default> &
+  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.4.0/node_modules/nuxt/dist/head/runtime/plugins/unhead").default> &
+  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.4.0/node_modules/nuxt/dist/app/plugins/router").default> &
+  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.4.0/node_modules/nuxt/dist/app/plugins/chunk-reload.client").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/@pinia-plugin-persistedstate+nuxt@1.1.1_amz4aixu24t7iq73gx72poy44y/node_modules/@pinia-plugin-persistedstate/nuxt/dist/runtime/plugin").default>
 
 declare module '#app' {

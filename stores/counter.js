@@ -15,8 +15,8 @@ export const useCounterStore = defineStore("counter", {
       this.count--;
     },
     setData(res) {
-      debugger;
-      this.data = res;
+      // debugger;
+      this.data = res._rawValue;
     },
     async fetchUsers() {
       try {

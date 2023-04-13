@@ -3,17 +3,17 @@
     <!-- <NuxtWelcome /> -->
 
     <button @click="counter.decrement()">---</button>
-    <br>
+    <br />
     <p>{{ counter.count }}</p>
-    <br>
+    <br />
     <button @click="counter.increment()">+++</button>
-    <br>
-    <br>
-    <br>
+    <br />
+    <br />
+    <br />
     <button @click="multiply.multi(4)">***</button>
-    <br>
+    <br />
     <p>{{ multiply.count }}</p>
-    <br>
+    <br />
     <!-- <button @click="counter.increment()">+++</button> -->
 
     <h1>Made By Getters</h1>
@@ -25,13 +25,23 @@
       {{ user.id }} {{ user.name }} {{ user.address }}
     </div>
 
-    <br>
-    <br>
+    <br />
+    <br />
     useFetch Api Call
-    <br>
-    <br>
+    <br />
+    <br />
 
-    <div v-for="p in products">
+    <div v-for="p in products" :key="p.id">
+      {{ p.title }}
+      <!-- <NuxtLink :to="`/products/${p.id}`">{{ p.title }}</NuxtLink> -->
+    </div>
+    <br />
+    <br />
+    Pina Store Data after api call
+    <br />
+    <br />
+
+    <div v-for="p in counter.data" :key="p.id">
       {{ p.title }}
       <!-- <NuxtLink :to="`/products/${p.id}`">{{ p.title }}</NuxtLink> -->
     </div>
@@ -39,21 +49,21 @@
 </template>
 
 <script setup>
-
-import { useCounterStore } from '@/stores/counter'
-import { useMultiplyStore } from './stores/multiply';
-
+import { useCounterStore } from "@/stores/counter";
+import { useMultiplyStore } from "./stores/multiply";
 
 // access the `counter` variable anywhere in the component ✨
-const counter = useCounterStore()
-const multiply = useMultiplyStore()
+const counter = useCounterStore();
+const multiply = useMultiplyStore();
 
-// Api Function Call from Pina Store
+// Api Function Call from Pina Store but doesn't work with SSR
 // counter.fetchUsers()
 
-const { data: products } = await
-  useFetch('https://fakestoreapi.com/products')
-counter.setData(products)
-
+// Api Call with SSR
+const { data: products } = await useFetch("https://fakestoreapi.com/products", {
+  parseJson: true
+});
+counter.setData(products);
 console.log("Response", products);
+
 </script>

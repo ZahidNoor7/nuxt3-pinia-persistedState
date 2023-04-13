@@ -6,10 +6,10 @@
     "module": true,
     "resourceType": "script"
   },
-  "/Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/nuxt@3.3.3/node_modules/nuxt/dist/app/entry.js": {
+  "/Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/nuxt@3.4.0/node_modules/nuxt/dist/app/entry.js": {
     "resourceType": "script",
     "module": true,
     "isEntry": true,
-    "file": "/Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/nuxt@3.3.3/node_modules/nuxt/dist/app/entry.js"
+    "file": "/Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/nuxt@3.4.0/node_modules/nuxt/dist/app/entry.js"
   }
 }

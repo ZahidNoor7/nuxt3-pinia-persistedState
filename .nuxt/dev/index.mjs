@@ -11,12 +11,12 @@ import devalue from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nux
 import { renderToString } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/vue@3.2.47/node_modules/vue/server-renderer/index.mjs';
 import { createFetch as createFetch$1, Headers } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/ofetch@1.0.1/node_modules/ofetch/dist/node.mjs';
 import destr from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/destr@1.2.2/node_modules/destr/dist/index.mjs';
-import { createCall, createFetch } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/unenv@1.3.0/node_modules/unenv/runtime/fetch/index.mjs';
+import { createCall, createFetch } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/unenv@1.3.1/node_modules/unenv/runtime/fetch/index.mjs';
 import { createHooks } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/hookable@5.5.3/node_modules/hookable/dist/index.mjs';
 import { snakeCase } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/scule@1.0.0/node_modules/scule/dist/index.mjs';
 import defu, { defuFn } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/defu@6.1.2/node_modules/defu/dist/defu.mjs';
 import { hash } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/ohash@1.0.0/node_modules/ohash/dist/index.mjs';
-import { parseURL, withoutBase, joinURL, withQuery } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/ufo@1.1.1/node_modules/ufo/dist/index.mjs';
+import { parseURL, withoutBase, joinURL, withQuery } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/ufo@0.8.6/node_modules/ufo/dist/index.mjs';
 import { createStorage, prefixStorage } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/unstorage@1.4.1/node_modules/unstorage/dist/index.mjs';
 import unstorage_47drivers_47fs from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/unstorage@1.4.1/node_modules/unstorage/drivers/fs.mjs';
 import { toRouteMatcher, createRouter } from 'file:///Users/muhammadzahidnoor/Desktop/Projects/NuxtJS/nuxt-pinia/node_modules/.pnpm/radix3@1.0.1/node_modules/radix3/dist/index.mjs';
@@ -487,11 +487,11 @@ const errorHandler = (async function errorhandler(error, event) {
   event.node.res.end(await res.text());
 });
 
-const _lazy_WCGgPE = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_BYvosM = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/__nuxt_error', handler: _lazy_WCGgPE, lazy: true, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_WCGgPE, lazy: true, middleware: false, method: undefined }
+  { route: '/__nuxt_error', handler: _lazy_BYvosM, lazy: true, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_BYvosM, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -671,6 +671,7 @@ const getSPARenderer = lazyCachedFunction(async () => {
   const renderToString = (ssrContext) => {
     const config = useRuntimeConfig();
     ssrContext.payload = {
+      _errors: {},
       serverRendered: false,
       config: {
         public: config.public,
@@ -709,11 +710,12 @@ const renderer = defineRenderHandler(async (event) => {
     url,
     event,
     runtimeConfig: useRuntimeConfig(),
-    noSSR: !!event.node.req.headers["x-nuxt-no-ssr"] || routeOptions.ssr === false || (false),
+    noSSR: event.context.nuxt?.noSSR || routeOptions.ssr === false || (false),
     error: !!ssrError,
     nuxt: void 0,
     /* NuxtApp */
     payload: ssrError ? { error: ssrError } : {},
+    _payloadReducers: {},
     islandContext
   };
   const renderer = ssrContext.noSSR ? await getSPARenderer() : await getSSRRenderer();
@@ -730,13 +732,14 @@ const renderer = defineRenderHandler(async (event) => {
   }
   const renderedMeta = await ssrContext.renderMeta?.() ?? {};
   const inlinedStyles = "";
+  const NO_SCRIPTS = routeOptions.experimentalNoScripts;
   const htmlContext = {
     island: Boolean(islandContext),
     htmlAttrs: normalizeChunks([renderedMeta.htmlAttrs]),
     head: normalizeChunks([
       renderedMeta.headTags,
       null,
-      _rendered.renderResourceHints(),
+      NO_SCRIPTS ? null : _rendered.renderResourceHints(),
       _rendered.renderStyles(),
       inlinedStyles,
       ssrContext.styles
@@ -748,8 +751,8 @@ const renderer = defineRenderHandler(async (event) => {
     ]),
     body: [_rendered.html],
     bodyAppend: normalizeChunks([
-      `<script>window.__NUXT__=${devalue(ssrContext.payload)}<\/script>`,
-      _rendered.renderScripts(),
+      NO_SCRIPTS ? void 0 : renderPayloadScript({ ssrContext, data: ssrContext.payload }),
+      routeOptions.experimentalNoScripts ? void 0 : _rendered.renderScripts(),
       // Note: bodyScripts may contain tags other than <script>
       renderedMeta.bodyScripts
     ])
@@ -800,10 +803,14 @@ function renderPayloadResponse(ssrContext) {
     statusCode: ssrContext.event.node.res.statusCode,
     statusMessage: ssrContext.event.node.res.statusMessage,
     headers: {
-      "content-type": "text/javascript;charset=UTF-8",
+      "content-type": "text/javascript;charset=utf-8",
       "x-powered-by": "Nuxt"
     }
   };
+}
+function renderPayloadScript(opts) {
+  opts.data.config = opts.ssrContext.config;
+  return `<script>window.__NUXT__=${devalue(opts.data)}<\/script>`;
 }
 function splitPayload(ssrContext) {
   const { data, prerenderedAt, ...initial } = ssrContext.payload;
